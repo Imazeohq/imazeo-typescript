@@ -1,0 +1,59 @@
+{
+  "name": "@imazeo/sdk",
+  "version": "1.0.0",
+  "description": "Official Imazeo TypeScript/JavaScript SDK for server-side image, transform, PDF, QR, and barcode APIs",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "GUIDE.md",
+    "openapi/backend.json"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepack": "npm run build"
+  },
+  "keywords": [
+    "imazeo",
+    "images",
+    "transforms",
+    "pdf",
+    "qr",
+    "barcode",
+    "sdk"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imazeo/imazeo-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/imazeo/imazeo-js/issues"
+  },
+  "homepage": "https://imazeo.com",
+  "devDependencies": {
+    "@types/node": "22.15.21",
+    "typescript": "5.8.3",
+    "vitest": "4.1.11"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
