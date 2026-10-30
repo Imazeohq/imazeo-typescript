@@ -4,40 +4,36 @@ Official **server-side** TypeScript/JavaScript SDK for Imazeo.
 
 |                |                                  |
 | -------------- | -------------------------------- |
-| Package        | `@imazeo/sdk` (proposed)         |
+| Package        | `@imazeo/sdk`                    |
 | SDK version    | `1.0.0`                          |
 | Default API    | `v1`                             |
 | Supported APIs | `v1`                             |
 | Runtime        | Node.js **20+** (native `fetch`) |
+| Registry       | [npm](https://www.npmjs.com/package/@imazeo/sdk) |
+| Source         | [GitHub](https://github.com/manishbalodia/imazeo-typescript) |
 
 > **Security:** Secret API keys (`X-API-Key`) are for trusted servers only.
 > Do **not** ship this client with a secret key in browsers.
 
 Integration contract and learning path: [GUIDE.md](GUIDE.md).
 
-## Package availability
+## Install
 
-This SDK is implemented locally but has not been published. Version `1.0.0` and
-the registry name above describe the proposed release. Registry ownership and
-publication must be confirmed before installing a public package with this name.
+```bash
+npm install @imazeo/sdk
+```
 
-Use the Imazeo HTTP documentation for a current integration. The examples below
-show the API of the local source package. Verified registry installation instructions
-will be added when the official release is available.
+Requires Node.js 20+. Create a project API key in the Imazeo customer portal.
+Default API origin is `https://api.imazeo.com` (override with `baseUrl` when needed).
 
 ## Learning path
 
 Read the self-contained [integration guide](GUIDE.md) for project/key setup,
 language examples, PDF response types, pagination, output retention, troubleshooting
-and production practices. It follows the same reviewed contract as the Main docs.
+and production practices.
 
-Set your deployment API origin explicitly; the SDK default is not a production
-availability guarantee. The examples use local source packages while publication
-is pending.
-
-The default HTTP client currently permits redirects. Use the explicit no-redirect
-client configuration in GUIDE.md for credentialed production requests; default
-transport hardening remains a release follow-up.
+The default HTTP transport refuses redirects so credentials stay on the configured
+API origin.
 
 ## Quick start
 
