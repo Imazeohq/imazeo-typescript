@@ -2,15 +2,22 @@
 
 ## 1. Prepare a server integration
 
-This client is implemented locally; registry publication is pending. Do not assume
-the proposed package name is available. Use the package's README for runtime and
-local development instructions. No install command here refers to a released package.
+Install the published package:
+
+```bash
+npm install @imazeo/sdk
+```
+
+Package: [`@imazeo/sdk`](https://www.npmjs.com/package/@imazeo/sdk) (npm org `imazeo`).
+Source: [manishbalodia/imazeo-typescript](https://github.com/manishbalodia/imazeo-typescript).
+Use the package README for runtime details.
 
 Create a Customer account, complete required verification, create a project and
 issue a project key. Set IMAZEO_API_KEY in protected server configuration and
-IMAZEO_API_ORIGIN to the supplied API origin (no /v1 suffix). Use HTTPS outside
-loopback development. A key can resolve its project through GET /v1/api-key/context;
-that response has projectId and keyId, not plan limits or the secret key.
+IMAZEO_API_ORIGIN to the supplied API origin (no /v1 suffix; production default
+`https://api.imazeo.com`). Use HTTPS outside loopback development. A key can
+resolve its project through GET /v1/api-key/context; that response has projectId
+and keyId, not plan limits or the secret key.
 
 The Main site's documentation paths, served by your configured Main origin, are:
 /docs/getting-started/, /docs/authentication/ and /docs/projects/.
@@ -18,7 +25,7 @@ These paths are site-relative; this guide does not assume a live production doma
 
 ## 2. Generate a QR code and render a delivery note
 
-The following example uses the local SDK. Obtain the original two-page synthetic
+The following example uses `@imazeo/sdk`. Obtain the original two-page synthetic
 delivery-note.pdf from the Main site's /examples/assets/delivery-note.pdf and put it
 in the working directory. The event URL is fictional. Run only against your configured
 API deployment with the required entitlements and credits.
