@@ -42,10 +42,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/manishbalodia/imazeo-typescript.git"
+    "url": "git+https://github.com/Imazeohq/imazeo-typescript.git"
   },
   "bugs": {
-    "url": "https://github.com/manishbalodia/imazeo-typescript/issues"
+    "url": "https://github.com/Imazeohq/imazeo-typescript/issues"
   },
   "homepage": "https://www.npmjs.com/package/@imazeo/sdk",
   "devDependencies": {

@@ -1,6 +1,6 @@
 # SDK release procedure (`@imazeo/sdk`)
 
-Independent repository: [manishbalodia/imazeo-typescript](https://github.com/manishbalodia/imazeo-typescript).  
+Independent repository: [Imazeohq/imazeo-typescript](https://github.com/Imazeohq/imazeo-typescript).  
 npm org: `imazeo` → package `@imazeo/sdk` (public).  
 Supported API prefix: `v1`. SemVer lives in this repo (`package.json` + `src/version.ts`).
 

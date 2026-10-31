@@ -9,7 +9,7 @@ npm install @imazeo/sdk
 ```
 
 Package: [`@imazeo/sdk`](https://www.npmjs.com/package/@imazeo/sdk) (npm org `imazeo`).
-Source: [manishbalodia/imazeo-typescript](https://github.com/manishbalodia/imazeo-typescript).
+Source: [Imazeohq/imazeo-typescript](https://github.com/Imazeohq/imazeo-typescript).
 Use the package README for runtime details.
 
 Create a Customer account, complete required verification, create a project and

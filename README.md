@@ -10,7 +10,7 @@ Official **server-side** TypeScript/JavaScript SDK for Imazeo.
 | Supported APIs | `v1`                             |
 | Runtime        | Node.js **20+** (native `fetch`) |
 | Registry       | [npm](https://www.npmjs.com/package/@imazeo/sdk) |
-| Source         | [GitHub](https://github.com/manishbalodia/imazeo-typescript) |
+| Source         | [GitHub](https://github.com/Imazeohq/imazeo-typescript) |
 
 > **Security:** Secret API keys (`X-API-Key`) are for trusted servers only.
 > Do **not** ship this client with a secret key in browsers.
