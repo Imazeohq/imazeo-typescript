@@ -28,7 +28,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "tsc --noEmit",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "release": "node scripts/release.mjs"
   },
   "keywords": [
     "imazeo",
