@@ -6,6 +6,7 @@ import {
   ValidationError,
 } from '../src/errors.js';
 import { normalizeBaseUrl } from '../src/http/transport.js';
+import { SDK_VERSION } from '../src/version.js';
 
 function jsonResponse(
   data: unknown,
@@ -56,7 +57,7 @@ describe('Imazeo client', () => {
       expect(url).toBe('https://api.example.com/v1/api-key/context');
       const headers = new Headers(init?.headers);
       expect(headers.get('X-API-Key')).toBe('secret-key');
-      expect(headers.get('User-Agent')).toMatch(/^Imazeo-TypeScript\/1\.0\.0/);
+      expect(headers.get('User-Agent')).toBe(`Imazeo-TypeScript/${SDK_VERSION}`);
       expect(headers.get('Authorization')).toBeNull();
       expect(init?.redirect).toBe('error');
       return jsonResponse({

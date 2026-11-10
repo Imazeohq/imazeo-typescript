@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+### Changed
+
+- Release packaging and public docs cleanup.
+
 ## 1.0.0
 
 ### Added

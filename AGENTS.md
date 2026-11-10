@@ -6,4 +6,4 @@ Independent public package for the Imazeo API-key client.
 - Scope: `context`, `images`, `transforms`, `qr`, `barcodes`, `pdf` only
 - Do not add admin or customer JWT portal APIs
 - Do not publish without maintainer approval — see [RELEASE.md](RELEASE.md)
-- Release: `$env:RELEASE_MODE="true"; npm run release -- --patch` (optional `--github-release`); Actions publishes with provenance
+- Release: `$env:RELEASE_MODE="true"; npm run release` (syncs `src/version.ts`); Actions publishes with provenance
