@@ -1,6 +1,6 @@
 {
   "name": "@imazeo/sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official Imazeo TypeScript/JavaScript SDK for server-side image, transform, PDF, QR, and barcode APIs",
   "type": "module",
   "main": "./dist/index.js",
