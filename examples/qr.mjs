@@ -11,7 +11,7 @@ async function main() {
 
   const client = new Imazeo({
     apiKey,
-    baseUrl: process.env.IMAZEO_BASE_URL ?? 'http://localhost:3001',
+    baseUrl: process.env.IMAZEO_BASE_URL ?? 'https://api.imazeo.com',
     projectId: process.env.IMAZEO_PROJECT_ID,
   });
 

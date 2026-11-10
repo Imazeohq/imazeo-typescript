@@ -1,20 +1,14 @@
 # OpenAPI contract sync
 
-This SDK does not embed a runtime dependency on the backend repository.
+This package does not depend on a live backend at install time. It ships a reviewed
+API-key OpenAPI snapshot as [`backend.json`](backend.json).
 
-To refresh after a reviewed backend release:
+To refresh after a reviewed API release:
 
-1. Build the backend (`npm run build` in `backend/`).
-2. Export OpenAPI (same approach as Customer/Admin):
+1. Export OpenAPI from the published Imazeo API (or a reviewed release artifact).
+2. Replace `backend.json` in this folder.
+3. Update `contract-meta.json` (generation date / source hash) when present.
+4. Diff SDK models against the new schemas; bump SemVer if public types change.
+5. Run `npm test && npm run build`.
 
-```sh
-# from customer/ or a copy of export-backend.mjs adapted for this repo
-node scripts/export-backend.mjs ../backend
-```
-
-3. Copy `openapi.json` / `backend.json` into this folder as `backend.json`.
-4. Update `contract-meta.json` (`generatedFromBackend` date/hash).
-5. Diff SDK models against new schemas; bump SemVer if public types change.
-6. Run `npm test && npm run build`.
-
-Do not hand-edit generated consumer types from OpenAPI into the public API without review.
+Do not expand the public SDK surface to admin or customer JWT portal APIs.
