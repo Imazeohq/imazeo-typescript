@@ -1,3 +1,5 @@
+import type { ProcessingOptions } from '../api-types.js';
+import { processingHeaders } from './project.js';
 import { appendFile, prepareUpload } from '../http/multipart.js';
 import type { HttpTransport, JsonSuccess } from '../http/transport.js';
 import type {
@@ -24,7 +26,7 @@ export class PdfResource {
 
   async info(
     source: UploadSource,
-    options?: { filename?: string; signal?: AbortSignal },
+    options?: ProcessingOptions & { filename?: string; signal?: AbortSignal },
   ): Promise<PdfInfo> {
     const projectId = await this.projectId();
     const prepared = await prepareUpload(source, {
@@ -38,17 +40,22 @@ export class PdfResource {
       'POST',
       url,
       form,
-      { timeoutMs: PDF_TIMEOUT_MS, signal: options?.signal },
+      {
+        headers: processingHeaders(options),
+        timeoutMs: PDF_TIMEOUT_MS,
+        signal: options?.signal,
+      },
     );
     return res.data;
   }
 
   async render(
     source: UploadSource,
-    options: PdfRenderOptions & {
-      filename?: string;
-      signal?: AbortSignal;
-    } = {},
+    options: PdfRenderOptions &
+      ProcessingOptions & {
+        filename?: string;
+        signal?: AbortSignal;
+      } = {},
   ): Promise<BinaryResult | { pages: PdfRenderPage[]; requestId: string }> {
     const projectId = await this.projectId();
     const prepared = await prepareUpload(source, {
@@ -73,6 +80,7 @@ export class PdfResource {
       this.http.path(['projects', projectId, 'tools', 'pdf', 'render']) +
       (qs ? `?${qs}` : '');
     const result = await this.http.requestMultipartBinary('POST', url, form, {
+      headers: processingHeaders(options),
       timeoutMs: PDF_TIMEOUT_MS,
       signal: options.signal,
     });
@@ -83,7 +91,7 @@ export class PdfResource {
 
   async merge(
     sources: UploadSource[],
-    options?: { signal?: AbortSignal },
+    options?: ProcessingOptions & { signal?: AbortSignal },
   ): Promise<BinaryResult> {
     if (sources.length === 0) throw new Error('At least one PDF is required');
     const projectId = await this.projectId();
@@ -103,6 +111,7 @@ export class PdfResource {
       'merge',
     ]);
     const result = await this.http.requestMultipartBinary('POST', url, form, {
+      headers: processingHeaders(options),
       timeoutMs: PDF_TIMEOUT_MS,
       signal: options?.signal,
     });
@@ -113,10 +122,11 @@ export class PdfResource {
 
   async extract(
     source: UploadSource,
-    options: PdfExtractOptions & {
-      filename?: string;
-      signal?: AbortSignal;
-    },
+    options: PdfExtractOptions &
+      ProcessingOptions & {
+        filename?: string;
+        signal?: AbortSignal;
+      },
   ): Promise<BinaryResult> {
     const projectId = await this.projectId();
     const prepared = await prepareUpload(source, {
@@ -136,6 +146,7 @@ export class PdfResource {
       this.http.path(['projects', projectId, 'tools', 'pdf', 'extract']) +
       (qs ? `?${qs}` : '');
     const result = await this.http.requestMultipartBinary('POST', url, form, {
+      headers: processingHeaders(options),
       timeoutMs: PDF_TIMEOUT_MS,
       signal: options.signal,
     });

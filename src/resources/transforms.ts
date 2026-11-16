@@ -1,3 +1,5 @@
+import type { ProcessingOptions } from '../api-types.js';
+import { processingHeaders } from './project.js';
 import type { HttpTransport } from '../http/transport.js';
 import type {
   BinaryResult,
@@ -16,6 +18,7 @@ export class TransformsResource {
   async create(
     request: TransformRequest,
     signal?: AbortSignal,
+    processing: ProcessingOptions = {},
   ): Promise<BinaryResult> {
     if (!request.imageId && !request.url)
       throw new Error('Exactly one of imageId or url is required');
@@ -24,7 +27,11 @@ export class TransformsResource {
     const projectId = await this.projectId();
     const url = this.http.path(['projects', projectId, 'transforms']);
     return this.http.requestBinary('POST', url, {
-      headers: { 'Content-Type': 'application/json', Accept: '*/*' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: '*/*',
+        ...processingHeaders(processing),
+      },
       body: JSON.stringify(request),
       signal,
     });
@@ -86,10 +93,7 @@ export class TransformsResource {
     });
   }
 
-  async delete(
-    id: string,
-    signal?: AbortSignal,
-  ): Promise<{ message: string }> {
+  async delete(id: string, signal?: AbortSignal): Promise<{ message: string }> {
     const projectId = await this.projectId();
     const url = this.http.path(['projects', projectId, 'transforms', id]);
     const res = await this.http.requestJson<{ message: string }>(

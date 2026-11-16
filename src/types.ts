@@ -137,7 +137,8 @@ export type NormalizedTransformSpec = Omit<
 };
 
 export type TransformRequest = (
-  { imageId: string; url?: never } | { url: string; imageId?: never }
+  | { imageId: string; url?: never }
+  | { url: string; imageId?: never }
 ) & {
   mode?: TransformMode;
   maxOutputBytes?: number;
@@ -167,6 +168,8 @@ export type ApiKeyContext = {
 };
 
 export type QrGenerateInput = {
+  transparent?: boolean;
+  design?: import('./api-types.js').CodeDesign;
   content: string;
   format?: 'png' | 'svg';
   size?: number;
@@ -177,9 +180,16 @@ export type QrGenerateInput = {
 };
 
 export type BarcodeType =
-  'code128' | 'code39' | 'ean13' | 'ean8' | 'upca' | 'itf14';
+  | 'code128'
+  | 'code39'
+  | 'ean13'
+  | 'ean8'
+  | 'upca'
+  | 'itf14';
 
 export type BarcodeGenerateInput = {
+  transparent?: boolean;
+  design?: import('./api-types.js').CodeDesign;
   type: BarcodeType;
   content: string;
   format?: 'png' | 'svg';

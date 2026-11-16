@@ -1,3 +1,4 @@
+export type * from './api-types.js';
 export { Imazeo } from './client.js';
 export type { ImazeoOptions } from './types.js';
 export type {

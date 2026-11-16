@@ -2,14 +2,14 @@
 
 Official **server-side** TypeScript/JavaScript SDK for Imazeo.
 
-|                |                                  |
-| -------------- | -------------------------------- |
-| Package        | `@imazeo/sdk`                    |
-| SDK version    | `1.0.0`                          |
-| Default API    | `v1`                             |
-| Supported APIs | `v1`                             |
-| Runtime        | Node.js **20+** (native `fetch`) |
-| Registry       | [npm](https://www.npmjs.com/package/@imazeo/sdk) |
+|                |                                                         |
+| -------------- | ------------------------------------------------------- |
+| Package        | `@imazeo/sdk`                                           |
+| SDK version    | `1.0.1`                                                 |
+| Default API    | `v1`                                                    |
+| Supported APIs | `v1`                                                    |
+| Runtime        | Node.js **20+** (native `fetch`)                        |
+| Registry       | [npm](https://www.npmjs.com/package/@imazeo/sdk)        |
 | Source         | [GitHub](https://github.com/Imazeohq/imazeo-typescript) |
 
 > **Security:** Secret API keys (`X-API-Key`) are for trusted servers only.
@@ -39,21 +39,21 @@ API origin.
 ## Quick start
 
 ```ts
-import { writeFile } from 'node:fs/promises';
-import { Imazeo } from '@imazeo/sdk';
+import { writeFile } from "node:fs/promises";
+import { Imazeo } from "@imazeo/sdk";
 
 const client = new Imazeo({
   apiKey: process.env.IMAZEO_API_KEY!,
   baseUrl: process.env.IMAZEO_API_ORIGIN!, // required deployment configuration
-  // projectId: '…', // optional; otherwise resolved via /v1/api-key/context
+  // projectId is optional; otherwise resolved via /v1/api-key/context
 });
 
 const qr = await client.qr.generate({
-  content: 'https://imazeo.com',
-  format: 'png',
+  content: "https://imazeo.com",
+  format: "png",
   size: 256,
 });
-await writeFile('qr.png', qr.data);
+await writeFile("qr.png", qr.data);
 ```
 
 ## Authentication
@@ -67,27 +67,33 @@ Sends `X-API-Key` only. Never send `Authorization` together with an API key
 
 ## Resources
 
-| Resource            | Methods                                                                       |
-| ------------------- | ----------------------------------------------------------------------------- |
-| `client.context`    | `get()` → project/key IDs                                                     |
-| `client.images`     | `upload`, `list` (`page`/`limit`/`q`), `get`, `delete`, `download`            |
-| `client.transforms` | `create`, `list`, `get`, `download` (`ifNoneMatch` → `notModified`), `delete` |
-| `client.qr`         | `generate`                                                                    |
-| `client.barcodes`   | `generate`                                                                    |
-| `client.pdf`        | `info`, `render`, `merge`, `extract`                                          |
+| Resource              | Methods                                                                                               |
+| --------------------- | ----------------------------------------------------------------------------------------------------- |
+| `client.context`      | `get()` → project/key IDs                                                                             |
+| `client.images`       | `upload`, `list` (`page`/`limit`/`q`), `get`, `delete`, `download`                                    |
+| `client.transforms`   | `create`, `list`, `get`, `download` (`ifNoneMatch` → `notModified`), `delete`                         |
+| `client.qr`           | `generate`                                                                                            |
+| `client.barcodes`     | `generate`                                                                                            |
+| `client.pdf`          | `info`, `render`, `merge`, `extract`                                                                  |
+| `client.credits`      | Quote processing credits for an operation and measurable units                                        |
+| `client.operations`   | Get status, look up by kind/key, and recover a temporary result                                       |
+| `client.conversions`  | DOCX, XLSX, PPTX and website jobs: capabilities, submit, list, lookup, get, cancel, download and save |
+| `client.dynamicCodes` | Capabilities, create, list, get, edit, scan analytics and CSV export                                  |
+| `client.artifacts`    | Save preview bytes, list, get, download and delete private artifacts                                  |
+| `client.outputs`      | List project outputs and retrieve counts by type                                                      |
 
 ### Upload + transform
 
 ```ts
 const image = await client.images.upload(bytes, {
-  filename: 'photo.jpg',
-  contentType: 'image/jpeg',
+  filename: "photo.jpg",
+  contentType: "image/jpeg",
 });
 
 const out = await client.transforms.create({
   imageId: image._id,
-  mode: 'EPHEMERAL',
-  transform: { width: 1200, format: 'webp', quality: 85 },
+  mode: "EPHEMERAL",
+  transform: { width: 1200, format: "webp", quality: 85 },
 });
 // out.data → Uint8Array
 ```
@@ -96,8 +102,8 @@ const out = await client.transforms.create({
 
 ```ts
 const out = await client.transforms.create({
-  url: 'https://example.com/image.jpg',
-  transform: { width: 640, format: 'jpeg' },
+  url: "https://example.com/image.jpg",
+  transform: { width: 640, format: "jpeg" },
 });
 ```
 
@@ -105,15 +111,15 @@ const out = await client.transforms.create({
 
 ```ts
 const info = await client.pdf.info(pdfBytes);
-const page = await client.pdf.render(pdfBytes, { pages: '1', format: 'png' });
+const page = await client.pdf.render(pdfBytes, { pages: "1", format: "png" });
 const merged = await client.pdf.merge([pdfA, pdfB]);
-const extracted = await client.pdf.extract(pdfBytes, { pages: '1,2' });
+const extracted = await client.pdf.extract(pdfBytes, { pages: "1,2" });
 ```
 
 ## Errors
 
 ```ts
-import { ImazeoError, RateLimitError } from '@imazeo/sdk';
+import { ImazeoError, RateLimitError } from "@imazeo/sdk";
 
 try {
   await client.images.get(id);
@@ -177,9 +183,9 @@ A reviewed API-key OpenAPI snapshot ships in this repo as
 
 ```typescript
 await client.barcodes.generate({
-  type: 'code128',
-  content: 'IMAZEO-2026',
-  format: 'svg',
+  type: "code128",
+  content: "IMAZEO-2026",
+  format: "svg",
   includeText: false,
 });
 ```
