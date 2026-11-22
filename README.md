@@ -5,7 +5,7 @@ Official **server-side** TypeScript/JavaScript SDK for Imazeo.
 |                |                                                         |
 | -------------- | ------------------------------------------------------- |
 | Package        | `@imazeo/sdk`                                           |
-| SDK version    | `1.0.1`                                                 |
+| SDK version    | `1.1.0`                                                 |
 | Default API    | `v1`                                                    |
 | Supported APIs | `v1`                                                    |
 | Runtime        | Node.js **20+** (native `fetch`)                        |
@@ -147,7 +147,7 @@ try {
 ## API version vs package version
 
 - **API** path version: `v1` (configured via `apiVersion`)
-- **SDK** SemVer: `package.json` → `1.0.0`
+- **SDK** SemVer: `package.json` → `1.1.0`
 
 `Imazeo.apiCompatibility` reports supported API versions.
 
