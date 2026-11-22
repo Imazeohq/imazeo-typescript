@@ -1,3 +1,5 @@
+import type { ProcessingOptions } from '../api-types.js';
+import { processingHeaders } from './project.js';
 import type { HttpTransport } from '../http/transport.js';
 import type { BarcodeGenerateInput, BinaryResult } from '../types.js';
 import { LIGHT_TIMEOUT_MS } from '../version.js';
@@ -11,11 +13,16 @@ export class BarcodesResource {
   async generate(
     input: BarcodeGenerateInput,
     signal?: AbortSignal,
+    processing: ProcessingOptions = {},
   ): Promise<BinaryResult> {
     const projectId = await this.projectId();
     const url = this.http.path(['projects', projectId, 'tools', 'barcode']);
     return this.http.requestBinary('POST', url, {
-      headers: { 'Content-Type': 'application/json', Accept: '*/*' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: '*/*',
+        ...processingHeaders(processing),
+      },
       body: JSON.stringify(input),
       timeoutMs: LIGHT_TIMEOUT_MS,
       signal,

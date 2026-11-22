@@ -1,13 +1,16 @@
-import {
-  createTransportConfig,
-  HttpTransport,
-} from './http/transport.js';
+import { createTransportConfig, HttpTransport } from './http/transport.js';
 import { ContextResource } from './resources/context.js';
 import { ImagesResource } from './resources/images.js';
 import { TransformsResource } from './resources/transforms.js';
 import { QrResource } from './resources/qr.js';
 import { BarcodesResource } from './resources/barcodes.js';
 import { PdfResource } from './resources/pdf.js';
+import { CreditsResource } from './resources/credits.js';
+import { OperationsResource } from './resources/operations.js';
+import { OutputsResource } from './resources/outputs.js';
+import { DynamicCodesResource } from './resources/dynamic-codes.js';
+import { ArtifactsResource } from './resources/artifacts.js';
+import { ConversionsResource } from './resources/conversions.js';
 import type { ImazeoOptions } from './types.js';
 import {
   DEFAULT_API_VERSION,
@@ -26,6 +29,12 @@ export class Imazeo {
   readonly qr: QrResource;
   readonly barcodes: BarcodesResource;
   readonly pdf: PdfResource;
+  readonly credits: CreditsResource;
+  readonly operations: OperationsResource;
+  readonly outputs: OutputsResource;
+  readonly dynamicCodes: DynamicCodesResource;
+  readonly artifacts: ArtifactsResource;
+  readonly conversions: ConversionsResource;
   readonly context: ContextResource;
 
   private readonly http: HttpTransport;
@@ -50,6 +59,12 @@ export class Imazeo {
     this.transforms = new TransformsResource(this.http, resolveProjectId);
     this.qr = new QrResource(this.http, resolveProjectId);
     this.barcodes = new BarcodesResource(this.http, resolveProjectId);
+    this.credits = new CreditsResource(this.http, resolveProjectId);
+    this.operations = new OperationsResource(this.http, resolveProjectId);
+    this.outputs = new OutputsResource(this.http, resolveProjectId);
+    this.dynamicCodes = new DynamicCodesResource(this.http, resolveProjectId);
+    this.artifacts = new ArtifactsResource(this.http, resolveProjectId);
+    this.conversions = new ConversionsResource(this.http, resolveProjectId);
     this.pdf = new PdfResource(this.http, resolveProjectId);
   }
 
@@ -70,7 +85,8 @@ export class Imazeo {
   }
 
   private resolveProjectId(): Promise<string> {
-    if (this.configuredProjectId) return Promise.resolve(this.configuredProjectId);
+    if (this.configuredProjectId)
+      return Promise.resolve(this.configuredProjectId);
     this.projectIdPromise ??= this.context.get().then((c) => c.projectId);
     return this.projectIdPromise;
   }
